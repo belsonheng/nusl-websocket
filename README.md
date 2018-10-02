@@ -5,7 +5,7 @@ A websocket server that consumes RabbitMQ messages and emit to frontend.
 ```
 npm run start
 ```
-If you've nodemon installed for development,
+If you've [nodemon](https://nodemon.io/) installed for development,
 ```
 npm run dev
 ```
