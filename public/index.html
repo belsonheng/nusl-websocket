@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <link rel="stylesheet" type="text/css" href="/css/countdown.css" />
+    <link rel="stylesheet" type="text/css" href="/css/jquery.countdown.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="item">
+        <div id="title">
+          <h1>Time Remaining</h1>
+        </div>
+        <div id="dashboard"></div>
+      </div>
+    </div>
+    <script type="text/javascript" src="/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/js/jquery.plugin.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.countdown.min.js"></script>
+    <script type="text/javascript">
+      window.document.title = window.location.pathname.split('/')[1].toUpperCase();
+      var socket = io.connect('/');
+      socket.on('message', function(message) {
+        console.log('[x] ' + message);
+        $('#dashboard').countdown({until: new Date()});
+      });
+      socket.on('expiry', function(timestamp) {
+        console.log(`expires in ${timestamp} ms`);
+        $('#dashboard').countdown('destroy');
+        $('#dashboard').countdown({ until: new Date(timestamp) });
+      });
+    </script>
+  </body>
+</html>

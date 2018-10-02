@@ -1,0 +1,26 @@
+body {
+  font-family: 'Raleway',sans-serif;
+  background-color: #F5F5F5;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+}
+.item {
+  max-width: 90%;
+  width: 70%
+}
+h1 {
+  color: #DCDCDC;
+  font-size: 62px;
+  font-weight: 800;
+  line-height: 72px;
+  margin: 0 0 24px;
+  text-align: center;
+  text-transform: uppercase;
+}
+#dashboard {
+  font-size: 62px;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "nusl-websocket",
+  "version": "1.0.0",
+  "description": "A websocket server that consumes RabbitMQ messages and emit to frontend.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "author": "Belson Heng",
+  "license": "MIT",
+  "dependencies": {
+    "amqp": "^0.2.7",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1",
+    "jwt-decode": "^2.2.0",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
