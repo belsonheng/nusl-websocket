@@ -20,7 +20,7 @@ rabbitMQ = amqp.createConnection({ host: 'localhost' });
 
 rabbitMQ.on('ready', function() {
   io.on('connection', function(socket) {
-    var ip = (socket.request.headers['x-forwarded-for'] || socket.request.connection.remoteAddress).replace(/^.*:/, '').replace(/^.*:/, '');
+    var ip = (socket.request.headers['x-forwarded-for'] || socket.request.connection.remoteAddress).replace(/^.*:/, '');
     var hostname = socket.request.headers.referer.match(/[^/]*(?=(\/)?$)/)[0];
     console.log(ip + ' connected with hostname ' + hostname);
     socket.emit('message', hostname + ' connected to server');
@@ -39,6 +39,6 @@ rabbitMQ.on('ready', function() {
   });
 });
 
-server.listen(process.env.PORT, function() {
+server.listen(process.env.PORT || 8888, function() {
   console.log('[x] nusl-websocket server started');
 });
