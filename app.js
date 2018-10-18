@@ -8,6 +8,10 @@ const jwtDecode = require('jwt-decode');
 app.use(express.static(__dirname + '/node_modules'));
 app.use(express.static(__dirname + '/public'));
 
+app.get('/public/list', function(request, response) {
+    response.sendFile(__dirname + '/public/list.html')
+});
+
 app.get('/:hostname', function(request, response) {
   response.sendFile(__dirname + '/public/index.html');
 });
@@ -16,7 +20,7 @@ rabbitMQ = amqp.createConnection({ host: 'localhost' });
 
 rabbitMQ.on('ready', function() {
   io.on('connection', function(socket) {
-    var ip = socket.request.connection.remoteAddress.replace(/^.*:/, '');
+    var ip = (socket.request.headers['x-forwarded-for'] || socket.request.connection.remoteAddress).replace(/^.*:/, '').replace(/^.*:/, '');
     var hostname = socket.request.headers.referer.match(/[^/]*(?=(\/)?$)/)[0];
     console.log(ip + ' connected with hostname ' + hostname);
     socket.emit('message', hostname + ' connected to server');
@@ -35,6 +39,6 @@ rabbitMQ.on('ready', function() {
   });
 });
 
-server.listen(3000, function() {
-  console.log('[x] nusl-websocket server started on port 3000');
+server.listen(process.env.PORT, function() {
+  console.log('[x] nusl-websocket server started');
 });
